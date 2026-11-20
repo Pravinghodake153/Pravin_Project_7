@@ -1,0 +1,35 @@
+# ============================================================
+# .gitignore — Project 7 RAG System
+# ============================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Environment variables (never commit secrets)
+.env
+
+# ChromaDB persisted database (can be regenerated)
+chroma_db/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Sentence-transformers cache
+.cache/

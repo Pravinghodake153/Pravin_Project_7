@@ -1,0 +1,15 @@
+# ============================================================
+# requirements.txt — Project 7 RAG System Dependencies
+# ============================================================
+
+# PDF processing
+pymupdf>=1.28.0
+
+# Vector database
+chromadb>=1.5.0
+
+# Embeddings (runs locally on CPU — no API key needed)
+sentence-transformers>=6.0.0
+
+# Environment variable management
+python-dotenv>=1.0.0
