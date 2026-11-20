@@ -23,16 +23,24 @@ import urllib.parse
 # ----------------------------------------------------------
 # Load pre-extracted chunk corpus
 # ----------------------------------------------------------
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CORPUS_PATH = os.path.join(PROJECT_ROOT, "data", "rag_corpus.json")
+API_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(API_DIR)
+CORPUS_PATHS = [
+    os.path.join(API_DIR, "rag_corpus.json"),
+    os.path.join(PROJECT_ROOT, "data", "rag_corpus.json"),
+    "rag_corpus.json"
+]
 
 CHUNKS = []
-if os.path.exists(CORPUS_PATH):
-    try:
-        with open(CORPUS_PATH, "r", encoding="utf-8") as f:
-            CHUNKS = json.load(f)
-    except Exception:
-        CHUNKS = []
+for path in CORPUS_PATHS:
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                CHUNKS = json.load(f)
+            if CHUNKS:
+                break
+        except Exception:
+            pass
 
 
 def answer_question(question: str) -> dict:

@@ -270,6 +270,8 @@ python3 multi_test.py
 ## Vercel Deployment
 
 This project includes a serverless web deployment configuration for Vercel:
+- **Live URL**: [https://pravin-project-7.vercel.app](https://pravin-project-7.vercel.app)
+- **API Endpoint**: `https://pravin-project-7.vercel.app/api/answer?q=<question>`
 - `api/index.py`: Serverless RAG answering endpoint (`/api/answer?q=...`)
 - `public/index.html`: Interactive web dashboard (uses pure SVG icons, zero emojis)
 - `vercel.json`: Routing and configuration for serverless Python runtime
