@@ -1,1 +1,0 @@
-# Serverless function uses Python standard library only

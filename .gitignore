@@ -33,4 +33,14 @@ Thumbs.db
 
 # Sentence-transformers cache
 .cache/
-.vercel
+
+# ============================================================
+# Vercel Deployment Files (Excluded from GitHub repository)
+# ============================================================
+.vercel/
+.vercelignore
+vercel.json
+api/
+public/
+server.py
+data/rag_corpus.json
