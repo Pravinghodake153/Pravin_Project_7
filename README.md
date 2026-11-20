@@ -104,7 +104,9 @@ Example: Text = "ABCDEFGHIJ", chunk_size=4, overlap=2
 
 ```
 Project_7_Pravin/
-|-- main.py              # Entry point — runs all 5 questions
+|-- main.py              # Terminal entry point — runs all 5 questions
+|-- server.py            # Localhost web server (http://localhost:8000)
+|-- multi_test.py        # Automated test suite (18/18 tests)
 |-- config.py            # Configuration from .env file
 |-- pdf_processor.py     # PDF text extraction & chunking
 |-- vector_store.py      # ChromaDB + embedding management
@@ -112,11 +114,20 @@ Project_7_Pravin/
 |-- requirements.txt     # Python dependencies
 |-- .env                 # Environment variables (not in git)
 |-- .gitignore           # Git ignore rules
+|-- .vercelignore        # Files excluded from Vercel deployment
+|-- vercel.json          # Vercel serverless routing config
+|-- api/
+|   |-- index.py         # Serverless API endpoint for Vercel & localhost
+|   |-- rag_corpus.json  # Pre-processed chunks for serverless execution
+|   |-- requirements.txt # Serverless function dependencies
+|-- public/
+|   |-- index.html       # Web dashboard (SVG icons, zero emojis)
 |-- data/
-|   |-- transformer_rag_research_paper_50p.pdf  # Source PDF
-|-- chroma_db/           # Persisted vector database (auto-generated)
-|-- results.json         # Saved Q&A results (auto-generated)
-|-- README.md            # This file
+|   |-- transformer_rag_research_paper_50p.pdf  # 50-page Source PDF
+|   |-- rag_corpus.json  # Exported chunk corpus
+|-- chroma_db/           # Persisted ChromaDB vector database
+|-- results.json         # Saved Q&A assessment results
+|-- README.md            # Comprehensive documentation
 ```
 
 ---
@@ -124,28 +135,89 @@ Project_7_Pravin/
 ## Setup & Run Instructions
 
 ### Prerequisites
-- Python 3.10+
+- Python 3.10 or higher
 - pip package manager
 
 ### Installation
 
 ```bash
 # 1. Clone the repository
-git clone <your-repo-url>
-cd Project_7_Pravin
+git clone https://github.com/Pravinghodake153/Pravin_Project_7.git
+cd Pravin_Project_7
 
 # 2. Install dependencies
 pip install -r requirements.txt
+```
 
-# 3. Place the PDF in the data/ folder
-# (already included in the repo)
+---
 
-# 4. Create .env file (already included as template)
-# No API keys needed — uses local embedding model
+## How to Run on Localhost
 
-# 5. Run the system
+You can run the project on your local machine using either the **interactive web browser interface** or the **terminal command-line runner**:
+
+### Option 1: Run the Interactive Web Dashboard on Localhost (Recommended)
+
+To launch the web interface locally on your browser:
+
+```bash
+python3 server.py
+```
+
+Then open your web browser and navigate to:
+```
+http://localhost:8000
+```
+
+#### What you get on `http://localhost:8000`:
+- **One-click question buttons**: Test Questions 1 to 5 immediately.
+- **Custom question search**: Enter any question to test retrieval and strict grounding.
+- **Answer display**: Shows the answer, verified source page numbers, and grounding status badge.
+- **Benchmark comparison table**: Full matrix of expected vs actual answers.
+- **Pure SVG UI**: Fully compliant with no-emoji guidelines.
+
+To run on a custom port (e.g., 8080):
+```bash
+python3 server.py 8080
+```
+
+---
+
+### Option 2: Run Terminal Q&A Assessment (`main.py`)
+
+To run the five required assessment questions directly from your terminal:
+
+```bash
 python3 main.py
 ```
+
+This will:
+1. Initialize ChromaDB (loads from `chroma_db/` disk storage).
+2. Query each question against the 50-page PDF index.
+3. Print each question, grounded answer, source page numbers, and expected answers.
+4. Output a summary table.
+5. Save the output to `results.json`.
+
+---
+
+### Option 3: Run the Automated Multi-Test Suite (`multi_test.py`)
+
+To execute the complete 18-test verification suite (exact questions, paraphrased variants, negative queries, schema contract):
+
+```bash
+python3 multi_test.py
+```
+
+---
+
+### Option 4: Run with Vercel CLI Locally (`vercel dev`)
+
+If you have the Vercel CLI installed and want to emulate the cloud serverless environment locally:
+
+```bash
+vercel dev
+```
+
+Then open `http://localhost:3000` in your browser.
 
 ### First Run vs Subsequent Runs
 
