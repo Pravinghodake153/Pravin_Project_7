@@ -322,42 +322,6 @@ Then open `http://localhost:3000` in your browser.
 
 ---
 
-## Multiple Testing & Verification (`multi_test.py`)
-
-To guarantee strict compliance and eliminate any risk of hallucination or brittle matching, a comprehensive test suite with 18 automated tests is provided:
-
-```bash
-python3 multi_test.py
-```
-
-### Test Coverage:
-1. **Primary Assessment Suite**: Exact verification of Q1, Q2, Q3, Q4, Q5 against expected answers and sources.
-2. **Semantic Paraphrase Suite**: Verifies that rephrasing questions still extracts the grounded facts and cites the exact source page.
-3. **Negative & Guardrail Suite**: Tests out-of-domain queries (Sam Altman, Geography, Barbie movie, Tech CEOs, Physics) and confirms 100% return `[not found]` with empty sources `[]`.
-4. **Schema Compliance**: Validates that all responses adhere strictly to `{"answer": <str>, "sources": [<page_num>, ...]}`.
-5. **Persistence & Latency**: Verifies that subsequent queries complete in under 1 second without re-embedding.
-
----
-
-## Vercel Deployment
-
-This project includes a serverless web deployment configuration for Vercel:
-- **Live URL**: [https://pravin-project-7.vercel.app](https://pravin-project-7.vercel.app)
-- **API Endpoint**: `https://pravin-project-7.vercel.app/api/answer?q=<question>`
-- `api/index.py`: Serverless RAG answering endpoint (`/api/answer?q=...`)
-- `public/index.html`: Interactive web dashboard (uses pure SVG icons, zero emojis)
-- `vercel.json`: Routing and configuration for serverless Python runtime
-
-### Deploying to Vercel via CLI:
-```bash
-# Using a Vercel personal access token
-vercel deploy --prod --token <YOUR_VERCEL_TOKEN> --yes
-```
-
-Or connect the GitHub repository directly at [vercel.com](https://vercel.com/new).
-
----
-
 ## Execution Screenshot
 
 *(See the terminal output from running `python3 main.py`)*
